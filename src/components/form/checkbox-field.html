@@ -1,0 +1,7 @@
+<div class="field">
+  <label class="field__label">
+    <input type="checkbox" name="{{ name }}" value="{{ value }}" class="field__checkbox" {{ checked ? 'checked' : '' }} />
+    {{ label }}
+  </label>
+  {{ error ? `<span class="field__error">${error}</span>` : '' }}
+</div>

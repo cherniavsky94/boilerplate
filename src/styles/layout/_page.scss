@@ -1,0 +1,28 @@
+@import '../abstracts/variables';
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page__header {
+  width: 100%;
+}
+
+.page__main {
+  flex: 1;
+  width: 100%;
+}
+
+.page__footer {
+  width: 100%;
+  margin-top: auto;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}

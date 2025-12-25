@@ -1,0 +1,7 @@
+<div class="field">
+  <label class="field__label" for="{{ name }}">{{ label }}</label>
+  <select id="{{ name }}" name="{{ name }}" class="field__select">
+    <slot></slot>
+  </select>
+  {{ error ? `<span class="field__error">${error}</span>` : '' }}
+</div>

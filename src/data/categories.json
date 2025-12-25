@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Electronics",
+    "slug": "electronics"
+  },
+  {
+    "id": 2,
+    "name": "Clothing",
+    "slug": "clothing"
+  },
+  {
+    "id": 3,
+    "name": "Books",
+    "slug": "books"
+  }
+]

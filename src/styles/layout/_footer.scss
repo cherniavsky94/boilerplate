@@ -1,0 +1,9 @@
+@import '../abstracts/variables';
+
+.footer {
+  background-color: $color-gray-light;
+  color: $color-gray-dark;
+  padding: $spacing-lg 0;
+  border-top: 1px solid $color-gray;
+  margin-top: $spacing-xl;
+}

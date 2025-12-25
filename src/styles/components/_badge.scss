@@ -1,0 +1,31 @@
+@import '../abstracts/variables';
+
+.badge {
+  display: inline-block;
+  padding: $spacing-xs $spacing-sm;
+  background-color: $color-gray-light;
+  color: $color-gray-dark;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  &--primary {
+    background-color: $color-primary;
+    color: $color-white;
+  }
+
+  &--secondary {
+    background-color: $color-secondary;
+    color: $color-white;
+  }
+
+  &--success {
+    background-color: $color-success;
+    color: $color-white;
+  }
+
+  &--danger {
+    background-color: $color-danger;
+    color: $color-white;
+  }
+}

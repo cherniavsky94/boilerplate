@@ -1,0 +1,22 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><block name="title">Default Page</block></title>
+  </head>
+  <body>
+    <div class="page">
+      <block name="header">
+        <include src="./components/layout/header.html"></include>
+      </block>
+      <main class="page__main">
+        <div class="container">
+          <block name="content"></block>
+        </div>
+      </main>
+      <block name="footer">
+        <include src="./components/layout/footer.html"></include>
+      </block>
+    </div>
+  </body>
+</html>

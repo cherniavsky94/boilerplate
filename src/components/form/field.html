@@ -1,0 +1,5 @@
+<div class="field">
+  <label class="field__label" for="{{ name }}">{{ label }}</label>
+  <input type="text" id="{{ name }}" name="{{ name }}" class="field__input" placeholder="{{ placeholder || '' }}" {{ required ? 'required' : '' }} />
+  {{ error ? `<span class="field__error">${error}</span>` : '' }}
+</div>

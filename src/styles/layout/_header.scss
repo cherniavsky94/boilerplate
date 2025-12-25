@@ -1,0 +1,16 @@
+@import '../abstracts/variables';
+
+.header {
+  background-color: $color-dark;
+  color: $color-white;
+  padding: $spacing-md 0;
+  box-shadow: 0 2px 4px rgba($color-black, 0.1);
+
+  a {
+    color: $color-white;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}

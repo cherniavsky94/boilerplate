@@ -1,0 +1,22 @@
+// Import all style layers in correct order
+@import './abstracts/variables';
+@import './abstracts/mixins';
+@import './abstracts/functions';
+
+@import './base/reset';
+@import './base/base';
+
+@import './layout/page';
+@import './layout/header';
+@import './layout/footer';
+
+@import './components/button';
+@import './components/badge';
+@import './components/field';
+@import './components/modal';
+
+@import './themes/dark';
+
+// page-specific styles
+// @import './pages/home';
+// @import './pages/catalog';

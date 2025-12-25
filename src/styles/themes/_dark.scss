@@ -1,0 +1,10 @@
+@import './abstracts/variables';
+
+body.theme-dark {
+  background-color: $color-dark;
+  color: $color-light;
+
+  a {
+    color: lighten($color-primary, 10%);
+  }
+}

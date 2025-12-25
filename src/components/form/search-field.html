@@ -1,0 +1,11 @@
+<div class="field">
+  <label class="field__label" for="{{ name }}">{{ label }}</label>
+  <input
+    type="search"
+    id="{{ name }}"
+    name="{{ name }}"
+    class="field__input"
+    placeholder="{{ placeholder || 'Search...' }}"
+  />
+  {{ error ? `<span class="field__error">${error}</span>` : '' }}
+</div>
