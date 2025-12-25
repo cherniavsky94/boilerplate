@@ -31,5 +31,10 @@
   "lint-staged": {
     "**/*.{js,ts,jsx,tsx,css,scss,html,md,json,yml,yaml}": "prettier --write"
   },
+  "browserslist": [
+    "defaults",
+    "not ie 11",
+    "maintained node versions"
+  ],
   "packageManager": "pnpm@9.0.0"
 }
