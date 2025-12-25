@@ -2,6 +2,7 @@ import include from 'posthtml-include';
 import extend from 'posthtml-extend';
 import expressions from 'posthtml-expressions';
 import components from 'posthtml-components';
+import bem from 'posthtml-bem';
 
 export default {
   plugins: [
@@ -15,6 +16,7 @@ export default {
       // По умолчанию можно хранить компоненты в src/components
       // components: 'src/components'
     }),
+    bem(),
   ],
   options: {
     recognizeSelfClosing: true,

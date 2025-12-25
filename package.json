@@ -16,6 +16,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "posthtml": "^0.16.7",
+    "posthtml-bem": "^0.2.2",
     "posthtml-components": "^1.0.0",
     "posthtml-expressions": "^1.11.4",
     "posthtml-extend": "^0.6.5",
