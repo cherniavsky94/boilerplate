@@ -3,53 +3,444 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Boilerplate - Page Index</title>
+    <title>Boilerplate | Pages Hub</title>
     <style>
-      .pages-list {
-        max-width: 600px;
-        margin: 2rem auto;
-        padding: 2rem;
+      :root {
+        --bg: #0f1115;
+        --card: #161922;
+        --border: #23283a;
+        --text: #e6e8ef;
+        --muted: #a8b0c2;
+        --accent: #7c5dff;
+        --accent-2: #4fe3c1;
+        --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        --radius: 16px;
       }
 
-      .pages-list h1 {
-        margin-bottom: 2rem;
-        text-align: center;
+      * {
+        box-sizing: border-box;
       }
 
-      .pages-list ul {
-        list-style: none;
-        padding: 0;
+      body {
         margin: 0;
+        min-height: 100vh;
+        font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        background: radial-gradient(140% 80% at 10% 20%, rgba(124, 93, 255, 0.18), transparent 40%),
+          radial-gradient(120% 80% at 80% 0%, rgba(79, 227, 193, 0.18), transparent 40%),
+          var(--bg);
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 16px;
       }
 
-      .pages-list li {
-        margin-bottom: 1rem;
+      .shell {
+        width: min(1100px, 100%);
+        padding: 32px;
+        background: linear-gradient(180deg, rgba(35, 40, 58, 0.72), rgba(22, 25, 34, 0.9));
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(12px);
       }
 
-      .pages-list a {
-        display: inline-block;
-        padding: 0.75rem 1.5rem;
-        background-color: #007bff;
-        color: white;
+      .headline {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 28px;
+      }
+
+      .brand {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .logo {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        display: grid;
+        place-items: center;
+        color: #0b0c10;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        box-shadow: 0 10px 30px rgba(124, 93, 255, 0.35);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 26px;
+        letter-spacing: -0.02em;
+      }
+
+      .tagline {
+        color: var(--muted);
+        font-size: 15px;
+        margin-top: 4px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 16px;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 20px;
+        align-items: start;
+      }
+
+      .preview {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px;
+        box-shadow: var(--shadow);
+        position: relative;
+        min-height: 420px;
+      }
+
+      .preview-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .preview-controls {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .select,
+      .btn {
+        background: #1c2030;
+        border: 1px solid var(--border);
+        color: var(--text);
+        border-radius: 10px;
+        padding: 8px 12px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: border-color 140ms ease, transform 140ms ease;
+      }
+
+      .select:focus-visible,
+      .btn:focus-visible {
+        outline: 2px solid rgba(124, 93, 255, 0.45);
+        outline-offset: 2px;
+      }
+
+      .btn:hover,
+      .select:hover {
+        border-color: rgba(124, 93, 255, 0.5);
+      }
+
+      .btn.primary {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: #0f1115;
+        border: none;
+        box-shadow: 0 10px 26px rgba(124, 93, 255, 0.35);
+      }
+
+      .device-frame {
+        background: #0b0c10;
+        border-radius: 22px;
+        border: 1px solid var(--border);
+        box-shadow: inset 0 0 0 8px #0f1115, 0 20px 50px rgba(0, 0, 0, 0.5);
+        margin: 0 auto;
+        display: grid;
+        place-items: center;
+        padding: 10px;
+        transition: width 180ms ease, height 180ms ease;
+      }
+
+      .device-frame iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 12px;
+        background: white;
+      }
+
+      .preview-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: 8px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 18px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+      }
+
+      .card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(120% 80% at 0% 0%, rgba(124, 93, 255, 0.08), transparent 45%);
+        pointer-events: none;
+      }
+
+      .card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(124, 93, 255, 0.45);
+        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      .card h2 {
+        margin: 0 0 6px;
+        font-size: 18px;
+        letter-spacing: -0.01em;
+      }
+
+      .meta {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 10px;
+      }
+
+      .pill {
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(124, 93, 255, 0.12);
+        border: 1px solid rgba(124, 93, 255, 0.35);
+        color: #c8bbff;
+        font-weight: 600;
+        font-size: 12px;
+      }
+
+      .desc {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.6;
+        margin: 0 0 14px;
+      }
+
+      .progress {
+        height: 10px;
+        border-radius: 999px;
+        background: #1f2433;
+        border: 1px solid var(--border);
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 10px;
+      }
+
+      .progress span {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        width: var(--value, 50%);
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+      }
+
+      .foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .foot .stat {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .foot a {
+        padding: 8px 14px;
+        border-radius: 10px;
         text-decoration: none;
-        border-radius: 4px;
-        transition: background-color 0.3s ease;
+        font-weight: 600;
+        color: #0f1115;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        box-shadow: 0 8px 22px rgba(124, 93, 255, 0.35);
+        transition: transform 140ms ease, box-shadow 140ms ease;
       }
 
-      .pages-list a:hover {
-        background-color: #0056b3;
+      .foot a:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 28px rgba(124, 93, 255, 0.45);
+      }
+
+      .status-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--accent-2);
+        box-shadow: 0 0 0 6px rgba(79, 227, 193, 0.14);
+        margin-right: 6px;
+      }
+
+      @media (max-width: 640px) {
+        .shell {
+          padding: 20px;
+        }
+        .headline {
+          gap: 8px;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="pages-list">
-      <h1>Boilerplate Pages</h1>
-      <ul>
-        <li><a href="/home.html">Home</a></li>
-        <li><a href="/catalog.html">Catalog</a></li>
-        <li><a href="/product.html">Product</a></li>
-      </ul>
+    <div class="shell">
+      <div class="headline">
+        <div class="brand">
+          <div class="logo">BV</div>
+          <div>
+            <h1>Boilerplate Vault</h1>
+            <div class="tagline">Быстрый старт. Чистая структура. Готово к продакшену.</div>
+          </div>
+        </div>
+        <div class="pill">multi-page · posthtml · sass</div>
+      </div>
+
+      <div class="layout">
+        <div class="grid" id="pages"></div>
+
+        <div class="preview">
+          <div class="preview-head">
+            <div>
+              <div style="font-weight:700; letter-spacing:-0.01em;">Live Preview</div>
+              <div class="tagline" id="preview-title">Home</div>
+            </div>
+            <div class="preview-controls">
+              <select id="page-select" class="select" aria-label="Выбор страницы">
+                <option value="/home.html">Home</option>
+                <option value="/catalog.html">Catalog</option>
+                <option value="/product.html">Product</option>
+              </select>
+              <select id="device-select" class="select" aria-label="Выбор устройства">
+                <option value="phone">Phone</option>
+                <option value="tablet">Tablet</option>
+              </select>
+              <button class="btn primary" id="rotate-btn" type="button">Rotate</button>
+            </div>
+          </div>
+
+          <div class="device-frame" id="device-frame">
+            <iframe id="frame" title="Page preview" src="/home.html"></iframe>
+          </div>
+          <div class="preview-meta" id="preview-meta">
+            <span>390 × 844</span>
+            <span>Portrait</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <script type="module" src="/src/scripts/main.js"></script>
+
+    <script>
+      const pages = [
+        {
+          title: 'Home',
+          href: '/home.html',
+          desc: 'Стартовая страница с общей типографикой и навигацией.',
+          progress: 90,
+          status: 'stable',
+        },
+        {
+          title: 'Catalog',
+          href: '/catalog.html',
+          desc: 'Сетка карточек товаров, готовая для фильтров и сортировки.',
+          progress: 75,
+          status: 'in progress',
+        },
+        {
+          title: 'Product',
+          href: '/product.html',
+          desc: 'Детальная карточка продукта с блоками характеристик.',
+          progress: 65,
+          status: 'draft',
+        },
+      ];
+
+      const container = document.getElementById('pages');
+      const frame = document.getElementById('frame');
+      const deviceFrame = document.getElementById('device-frame');
+      const deviceSelect = document.getElementById('device-select');
+      const pageSelect = document.getElementById('page-select');
+      const rotateBtn = document.getElementById('rotate-btn');
+      const meta = document.getElementById('preview-meta');
+      const previewTitle = document.getElementById('preview-title');
+
+      const devices = {
+        phone: { w: 390, h: 844 },
+        tablet: { w: 834, h: 1112 },
+      };
+
+      let orientation = 'portrait';
+
+      const applyDevice = () => {
+        const type = deviceSelect.value;
+        const { w, h } = devices[type];
+        const width = orientation === 'portrait' ? w : h;
+        const height = orientation === 'portrait' ? h : w;
+        deviceFrame.style.width = `${width}px`;
+        deviceFrame.style.height = `${height}px`;
+        meta.innerHTML = `<span>${width} × ${height}</span><span>${orientation === 'portrait' ? 'Portrait' : 'Landscape'}</span>`;
+      };
+
+      const updatePage = () => {
+        const href = pageSelect.value;
+        frame.src = href;
+        previewTitle.textContent = pageSelect.options[pageSelect.selectedIndex].textContent;
+      };
+
+      rotateBtn.addEventListener('click', () => {
+        orientation = orientation === 'portrait' ? 'landscape' : 'portrait';
+        applyDevice();
+      });
+
+      deviceSelect.addEventListener('change', applyDevice);
+      pageSelect.addEventListener('change', updatePage);
+
+      pages.forEach((page) => {
+        const card = document.createElement('article');
+        card.className = 'card';
+
+        card.innerHTML = `
+          <h2>${page.title}</h2>
+          <div class="meta">
+            <span class="status-dot"></span>
+            <span>${page.status}</span>
+          </div>
+          <p class="desc">${page.desc}</p>
+          <div class="progress" aria-label="progress ${page.progress}%">
+            <span style="--value: ${page.progress}%"></span>
+          </div>
+          <div class="foot">
+            <span class="stat">Готовность: ${page.progress}%</span>
+            <a href="${page.href}">Открыть</a>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      // init
+      applyDevice();
+      updatePage();
+    </script>
   </body>
 </html>
