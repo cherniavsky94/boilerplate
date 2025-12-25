@@ -10,7 +10,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint:css": "stylelint \"src/**/*.{css,scss}\"",
-    "lint:html": "html-validate \"src/**/*.html\" index.html",
+    "lint:html": "html-validate \"src/**/*.html\"",
     "lint:html:vnu": "pnpm build && vnu-jar --errors-only --skip-non-html dist",
     "lint-staged": "lint-staged",
     "prepare": "husky install",

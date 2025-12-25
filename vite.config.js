@@ -39,10 +39,23 @@ const multiPagePlugin = () => ({
       }
     }
 
-    // Удаляем пустую папку src
+    // Удаляем пустые папки src и scripts
     try {
       const srcPath = path_module.default.join(options.dir, 'src');
       await fs.rm(srcPath, { recursive: true, force: true });
+    } catch (_) {}
+
+    try {
+      const scriptsPath = path_module.default.join(options.dir, 'scripts');
+      await fs.rm(scriptsPath, { recursive: true, force: true });
+    } catch (_) {}
+
+    // Копируем common.js
+    try {
+      const commonSrc = path_module.default.join(process.cwd(), 'public/scripts/common.js');
+      const commonDest = path_module.default.join(options.dir, 'js/common.js');
+      await fs.mkdir(path_module.default.dirname(commonDest), { recursive: true });
+      await fs.copyFile(commonSrc, commonDest);
     } catch (_) {}
   },
 });
@@ -60,7 +73,50 @@ const getInput = async () => {
     input[key] = path.resolve(dirname, file);
   });
 
+  // Добавляем main.js как отдельный entry point
+  const dirname = path.dirname(new URL(import.meta.url).pathname);
+  input['main'] = path.resolve(dirname, 'src/scripts/main.js');
+
   return input;
+};
+
+const copyAssetsPlugin = () => ({
+  name: 'vite-copy-assets',
+  apply: 'build',
+  async writeBundle(options) {
+    const fs = (await import('fs')).promises;
+    const path_module = await import('path');
+
+    // Копируем fonts
+    try {
+      const fontsSrc = path_module.default.join(process.cwd(), 'src/assets/fonts');
+      const fontsDest = path_module.default.join(options.dir, 'assets/fonts');
+      await copyDir(fontsSrc, fontsDest, fs, path_module.default);
+    } catch (_) {}
+
+    // Копируем images
+    try {
+      const imagesSrc = path_module.default.join(process.cwd(), 'src/assets/images');
+      const imagesDest = path_module.default.join(options.dir, 'assets/images');
+      await copyDir(imagesSrc, imagesDest, fs, path_module.default);
+    } catch (_) {}
+  },
+});
+
+const copyDir = async (src, dest, fs, path_module) => {
+  await fs.mkdir(dest, { recursive: true });
+  const entries = await fs.readdir(src, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const srcPath = path_module.join(src, entry.name);
+    const destPath = path_module.join(dest, entry.name);
+
+    if (entry.isDirectory()) {
+      await copyDir(srcPath, destPath, fs, path_module);
+    } else {
+      await fs.copyFile(srcPath, destPath);
+    }
+  }
 };
 
 export default defineConfig({
@@ -68,16 +124,20 @@ export default defineConfig({
     rollupOptions: {
       input: await getInput(),
       output: {
-        entryFileNames: (chunkInfo) => {
-          const name = chunkInfo.name;
-          return name.includes('/') ? name.replace(/\//g, '-') + '.html' : name + '.html';
+        entryFileNames: 'js/[name].min.js',
+        chunkFileNames: 'js/[name]-[hash].min.js',
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name.endsWith('.css')) {
+            return 'css/[name].min[extname]';
+          }
+          return 'assets/[name]-[hash][extname]';
         },
-        assetFileNames: 'assets/[name]-[hash][extname]',
       },
     },
   },
   plugins: [
     multiPagePlugin(),
+    copyAssetsPlugin(),
     posthtmlPlugin(),
     viteImagemin({
       gifsicle: {
