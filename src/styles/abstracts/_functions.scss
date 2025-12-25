@@ -1,11 +1,14 @@
-// Helper function to convert px to rem
+@use 'sass:math';
+@use 'sass:color';
+
+// Helper function to convert px to rem using math.div (slash division deprecated)
 @function rem($pixels) {
-  @return ($pixels / 16) * 1rem;
+  @return math.div($pixels, 16) * 1rem;
 }
 
-// Calculate contrast color
-@function contrast-color($color) {
-  @if (lightness($color) > 50) {
+// Calculate contrast color using color.lightness
+@function contrast-color($color-value) {
+  @if (color.lightness($color-value) > 50) {
     @return #000000;
   } @else {
     @return #ffffff;
