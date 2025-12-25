@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import posthtml from 'posthtml';
+import viteImagemin from 'vite-plugin-imagemin';
 
 const posthtmlPlugin = () => ({
   name: 'vite-posthtml',
@@ -18,5 +19,32 @@ const posthtmlPlugin = () => ({
 });
 
 export default defineConfig({
-  plugins: [posthtmlPlugin()],
+  plugins: [
+    posthtmlPlugin(),
+    viteImagemin({
+      gifsicle: {
+        optimizationLevel: 3,
+        interlaced: false,
+      },
+      mozjpeg: {
+        quality: 80,
+      },
+      pngquant: {
+        quality: [0.65, 0.9],
+        speed: 4,
+      },
+      svgo: {
+        plugins: [
+          {
+            name: 'removeViewBox',
+            active: false,
+          },
+          {
+            name: 'removeEmptyAttrs',
+            active: true,
+          },
+        ],
+      },
+    }),
+  ],
 });
