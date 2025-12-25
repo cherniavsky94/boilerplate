@@ -1,6 +1,22 @@
+import include from 'posthtml-include';
+import extend from 'posthtml-extend';
+import expressions from 'posthtml-expressions';
+import components from 'posthtml-components';
+
 export default {
-  // Добавляйте сюда плагины PostHTML, например: require('posthtml-include')({})
-  plugins: [],
-  // Опции PostHTML, например { recognizeSelfClosing: true }
-  options: {},
+  plugins: [
+    include({ root: 'src' }),
+    extend({ root: 'src' }),
+    expressions({
+      // Добавьте ваши переменные/локали при необходимости
+      // locals: { env: process.env.NODE_ENV }
+    }),
+    components({
+      // По умолчанию можно хранить компоненты в src/components
+      // components: 'src/components'
+    }),
+  ],
+  options: {
+    recognizeSelfClosing: true,
+  },
 };
