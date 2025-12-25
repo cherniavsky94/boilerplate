@@ -1,0 +1,10 @@
+# Directories
+node_modules
+.dist
+coverage
+dist
+build
+.out
+
+# Vite caches
+.vite
