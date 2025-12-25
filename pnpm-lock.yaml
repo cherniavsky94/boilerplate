@@ -19,6 +19,9 @@ importers:
       cssnano:
         specifier: ^7.0.6
         version: 7.1.2(postcss@8.5.6)
+      fast-glob:
+        specifier: ^3.3.2
+        version: 3.3.3
       html-validate:
         specifier: ^9.4.0
         version: 9.7.1

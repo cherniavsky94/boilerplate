@@ -21,6 +21,7 @@
     "@playwright/test": "^1.49.0",
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
+    "fast-glob": "^3.3.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "postcss": "^8.4.49",
