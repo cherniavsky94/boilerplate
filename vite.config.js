@@ -27,9 +27,9 @@ const multiPagePlugin = () => ({
     const path_module = await import('path');
 
     for (const fileName of Object.keys(bundle)) {
-      if (fileName.includes('src/pages/')) {
+      if (fileName.startsWith('src/') && fileName.endsWith('.html')) {
         const oldPath = path_module.default.join(options.dir, fileName);
-        const newFileName = fileName.replace('src/pages/', '');
+        const newFileName = fileName.replace(/^src\/pages\//, '').replace(/^src\//, '');
         const newPath = path_module.default.join(options.dir, newFileName);
 
         try {
@@ -76,6 +76,9 @@ const getInput = async () => {
   // Добавляем main.js как отдельный entry point
   const dirname = path.dirname(new URL(import.meta.url).pathname);
   input['main'] = path.resolve(dirname, 'src/scripts/main.js');
+
+  // Добавляем index.html из src
+  input['index'] = path.resolve(dirname, 'src/index.html');
 
   return input;
 };
