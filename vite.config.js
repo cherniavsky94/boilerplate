@@ -53,7 +53,7 @@ const multiPagePlugin = () => ({
     // Копируем common.js
     try {
       const commonSrc = path_module.default.join(process.cwd(), 'public/scripts/common.js');
-      const commonDest = path_module.default.join(options.dir, 'js/common.js');
+      const commonDest = path_module.default.join(options.dir, 'assets/js/common.js');
       await fs.mkdir(path_module.default.dirname(commonDest), { recursive: true });
       await fs.copyFile(commonSrc, commonDest);
     } catch (_) {}
@@ -124,11 +124,11 @@ export default defineConfig({
     rollupOptions: {
       input: await getInput(),
       output: {
-        entryFileNames: 'js/[name].min.js',
-        chunkFileNames: 'js/[name]-[hash].min.js',
+        entryFileNames: 'assets/js/[name].min.js',
+        chunkFileNames: 'assets/js/[name]-[hash].min.js',
         assetFileNames: (assetInfo) => {
           if (assetInfo.name.endsWith('.css')) {
-            return 'css/[name].min[extname]';
+            return 'assets/css/[name].min[extname]';
           }
           return 'assets/[name]-[hash][extname]';
         },
